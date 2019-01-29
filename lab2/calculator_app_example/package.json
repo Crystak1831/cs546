@@ -1,0 +1,15 @@
+{
+  "name": "calculator_app_example",
+  "version": "1.0.0",
+  "description": "A calculator app example",
+  "main": "index.js",
+  "scripts": {
+    "start": "node app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Guangqi Qing",
+  "license": "ISC",
+  "dependencies": {
+    "prompt": "^1.0.0"
+  }
+}

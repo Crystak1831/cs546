@@ -11,9 +11,18 @@ const questionTwo = function questionTwo(num) {
     // Implement question 2 here
     if(num < 1)
         return 0;
-    if (num == 1)
+    if (num == 1 || num == 2)
         return 1;
-    return questionTwo(num - 1) + questionTwo( num - 2);
+    // return questionTwo(num - 1) + questionTwo( num - 2);
+    let result = 0;
+    let before1 = 1;
+    let before2 = 1;
+    for(let i = 3; i <= num; i++){
+        result = before1 + before2;
+        before2 = before1;
+        before1 = result;
+    }
+    return result;
 }
 
 const questionThree = function questionThree(text) {
