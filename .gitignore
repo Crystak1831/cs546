@@ -1,2 +1,4 @@
 *.tern-port
 .DS_Store
+.#*
+*.zip
