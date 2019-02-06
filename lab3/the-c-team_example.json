@@ -1,0 +1,22 @@
+{
+    "firstName": "Guangqi",
+    "lastName": "Qing",
+    "CWID": "10430202",
+    "address" : {
+        "state": "NJ",
+        "city": "hoboken"
+    },
+    "phone":
+    [
+        {
+            "type": "home",
+            "number": "001"
+        },
+        {
+            "type": "fax",
+            "number": "002"
+        }
+    ],
+    "children": [],
+    "spouse": null
+}
