@@ -21,6 +21,11 @@ const range = function(end, value){
     if(end <= 0)
         throw `${end} should be positive`;
     let result = [];
+    if(typeof value === "undefined"){
+        for(let i = 1; i < end; ++i)
+            result.push(i);
+        return result;
+    }
     for(let i = 0; i < end; ++i)
         result.push(value);
     return result;
