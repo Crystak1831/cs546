@@ -22,7 +22,7 @@ const range = function(end, value){
         throw `${end} should be positive`;
     let result = [];
     if(typeof value === "undefined"){
-        for(let i = 1; i < end; ++i)
+        for(let i = 0; i < end; ++i)
             result.push(i);
         return result;
     }
@@ -41,6 +41,9 @@ const countElements = function(arr) {
             result[arr[i]] += 1;
     }
     return result;
+}
+for (var i = 0; i < collection.length; i++) {
+    
 }
 const isEqual = function (arr1,arr2) {
     if(false === Array.isArray(arr1))
