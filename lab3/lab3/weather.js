@@ -34,7 +34,6 @@ shouldTheyGoOutside = async (firstName, lastName) => {
             break;
         }
     }
-    console.log(typeof zip_code);
     if(zip_code == undefined)
         throw `People \"${firstName} ${lastName}\" does not exit`;
     weather_data = await getWeather();
