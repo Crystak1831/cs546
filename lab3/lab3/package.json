@@ -1,14 +1,15 @@
 {
-  "name": "lab3",
-  "version": "1.0.0",
-  "description": "",
-  "main": "app.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "Guangqi Qing 10430202",
-  "license": "ISC",
-  "dependencies": {
-    "axios": "^0.18.0"
-  }
+    "name": "lab3",
+    "version": "1.0.0",
+    "description": "",
+    "main": "app.js",
+    "scripts": {
+        "start": "node app.js",
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "author": "Guangqi Qing 10430202",
+    "license": "ISC",
+    "dependencies": {
+        "axios": "^0.18.0"
+    }
 }
