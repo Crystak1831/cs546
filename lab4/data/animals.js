@@ -60,7 +60,6 @@ rename = async function rename(id, newName){
         throw `${newName} should be string`;
     let animal = await get(id);
     const animalsCollection = await animals();
-    let newAnimal;
     try {
         // upsert default false
         await animalsCollection.updateOne({_id: animal._id},{$set: {
