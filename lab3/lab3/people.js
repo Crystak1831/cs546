@@ -62,7 +62,8 @@ firstNameMetrics = async() =>{
                     totalVowels++;
                 else
                     totalConsonants++;
-            }
+            }else
+                totalConsonants++;
         });
     });
     let metrics = {};
