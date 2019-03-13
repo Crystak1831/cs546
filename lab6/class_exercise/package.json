@@ -1,0 +1,16 @@
+{
+  "name": "class_exercise",
+  "version": "1.0.0",
+  "description": "class exercise",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js"
+  },
+  "author": "Guangqi Qing 10430202",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.18.0",
+    "express": "^4.16.4"
+  }
+}
