@@ -23,7 +23,6 @@ router.get("/:id", async(req, res) =>{
     let post;
     try{
         post = await postData.read(req.params.id);
-        console.log(post);
     }catch(err){
         res.status(404).send(err);
         return;
@@ -62,12 +61,11 @@ router.post("/", async(req, res) =>{
     let animal;
     try {
         const newPost = await postData.create(postInfo.title, postInfo.author, postInfo.content);
-        console.log(newPost);
         animal = await animalData.get(newPost.author.toString());
         authorObj._id = animal._id;
         authorObj.name = animal.name;
-        animal.author = authorObj;
-        res.json(animal);
+        newPost.author = authorObj;
+        res.json(newPost);
     } catch (err) {
         res.status(400).send(err);
     }
@@ -116,7 +114,20 @@ router.put("/:id",async (req,res) =>{
         };
         res.status(200).json(post);
     }catch(err){
-        res.status(400).send(err);
+        res.status(404).send(err);
+    }
+});
+router.delete("/:id", async(req, res) => {
+    let post = undefined, result = {};
+    try {
+        post = await postData.delete(req.params.id);
+        let author = await animalData.get(post.author.toString());
+        post.author = {_id:author._id, name:author.name};
+        result.deleted = true;
+        result.data = post;
+        res.status(200).json(result);
+    } catch (err) {
+        res.status(404).send(err);
     }
 });
 module.exports = router;

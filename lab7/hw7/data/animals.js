@@ -1,6 +1,7 @@
 const mongoCollections = require("./collections");
 const animals = mongoCollections.animals;
 const posts = mongoCollections.posts;
+const postData = require("./posts.js");
 const {ObjectId} = require("mongodb");
 create = async (name, animalType, likes) =>{
     if(!name)
@@ -104,11 +105,48 @@ retype = async(id, newType) =>{
     }
     return get(id);
 };
+/*
+  update the likes list, 0 for update, 0 for delete
+*/
+updateLikes = async(animalId, postId, action) =>{
+    if(!animalId || typeof animalId != `string`)
+        throw `need correct animalId`;
+    if(!postId || typeof postId != `string`)
+        throw `need correct postId`;
+    animal = await get(animalId);
+    post = await postData.read(postId);
+    let index = animal.likes.indexOf(post._id.toString());
+    if(index != -1 ){
+        if(action == 0 ){ // in likes need delete
+            animal.likes.splice(index,1);
+            const animalsCollection = await animals();
+            await animalsCollection.updateOne({_id: animal._id},{$set:{likes:animal.likes}});
+        }
+        return get(animal._id.toString());
+    }else{
+        if(action == 1){ // not in likes need update
+            animal.likes.push(post._id.toString());
+            const animalsCollection = await animals();
+            await animalsCollection.updateOne({_id: animal._id},{$set:{likes:animal.likes}});
+        }
+        return get(animal._id.toString());
+    }
+};
+// module.exports = {
+//     create: create,
+//     getAll: getAll,
+//     get: get,
+//     remove: remove,
+//     rename: rename,
+//     retype: retype,
+//     updateLikes: updateLikes
+// };
 module.exports = {
-    create: create,
-    getAll: getAll,
-    get: get,
-    remove: remove,
-    rename: rename,
-    retype: retype
+    create,
+    getAll,
+    get,
+    remove,
+    rename,
+    retype,
+    updateLikes
 };

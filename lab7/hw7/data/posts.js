@@ -1,15 +1,15 @@
 const mongoCollections = require("./collections");
 const posts = mongoCollections.posts;
-const animalData = require("./animals");
 const {ObjectId} = require('mongodb');
 create = async (title, author, content) => {
     if(!title || typeof title != `string`)
         throw `post title illegal`;
-    if(!author || typeof author != `string` || !ObjectId.isValid(author))
+    if(!author || typeof author != `string`)
         throw `post author illegal`;
     if(!content || typeof content != `string`)
         throw `post content illegal`;
-    let animal = await animalData.get(author);
+    animalFn = require("./animals.js");
+    let animal = await animalFn.get(author);
     const addedPost = {
         title: title,
         author: animal._id,
