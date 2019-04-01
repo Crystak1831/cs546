@@ -2,6 +2,8 @@ const express = require("express");
 const app = express();
 const configRoutes = require("./routes");
 const bodyParser = require("body-parser");
+// const test = require("./data/animals.js");
+// console.log(test);
 app.use(bodyParser.json());
 configRoutes(app);
 app.listen(3000,() =>{

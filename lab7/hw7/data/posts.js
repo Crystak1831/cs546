@@ -8,7 +8,7 @@ create = async (title, author, content) => {
         throw `post author illegal`;
     if(!content || typeof content != `string`)
         throw `post content illegal`;
-    animalFn = require("./animals.js");
+    const animalFn = require("./animals");
     let animal = await animalFn.get(author);
     const addedPost = {
         title: title,
@@ -33,7 +33,7 @@ read = async (id) =>{
 Delete = async(id) => {
     let post = await read(id);
     const postsCollection = await posts();
-    postsCollection.deleteOne(post);
+    await postsCollection.deleteOne(post);
     return post;
 };
 newTitle = async(id, newTitle) =>{
@@ -70,11 +70,19 @@ getAll = async() => {
     }
     return allPosts;
 };
+getPostList = async(id) =>{
+    if(!id || typeof id != `string` || !ObjectId.isValid(id))
+        throw "need correct animal";
+    const postsCollection = await posts();
+    postsList = await postsCollection.find({author:new ObjectId(id)}).toArray();
+    return postsList;
+};
 module.exports = {
     getAll: getAll,
     read: read,
     create: create,
     newContent: newContent,
     newTitle: newTitle,
-    delete: Delete
+    delete: Delete,
+    getPostList: getPostList
 };

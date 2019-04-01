@@ -67,7 +67,6 @@ get = async (id) =>{
 };
 remove = async function remove(id){
     let animal = await get(id);
-    // console.log("remove");
     const animalsCollection = await animals();
     try {
         await animalsCollection.deleteOne(animal);
@@ -132,15 +131,6 @@ updateLikes = async(animalId, postId, action) =>{
         return get(animal._id.toString());
     }
 };
-// module.exports = {
-//     create: create,
-//     getAll: getAll,
-//     get: get,
-//     remove: remove,
-//     rename: rename,
-//     retype: retype,
-//     updateLikes: updateLikes
-// };
 module.exports = {
     create,
     getAll,

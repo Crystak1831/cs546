@@ -14,6 +14,10 @@ router.get("/", async(req, res) =>{
                 newLikesList.push({_id:id,title:post.title});
             }
             animal.likes = newLikesList;
+            postList = await postData.getPostList(animal._id.toString());
+            newLikesList = [];
+            for(post of postList)
+                newLikesList.push({_id:post._id, title: post.title});
             animal.posts = newLikesList;
         }
         res.status(200).json(animalsList);
@@ -30,6 +34,10 @@ router.get("/:id",async(req, res) =>{
             newLikeList.push({_id:id, title:post.title});
         }
         animal.likes = newLikeList;
+        newLikeList = [];
+        postList = await postData.getPostList(animal._id.toString());
+        for(post of postList)
+            newLikeList.push({_id:post._id, title:post.title});
         animal.posts = newLikeList;
         res.status(200).json(animal);
     } catch (err) {
@@ -52,6 +60,7 @@ router.post("/", async (req, res) =>{
     }
     try {
         const newAnimal = await animalData.create(animalInfo.name, animalInfo.animalType);
+        newAnimal.posts = [];
         res.status(200).json(newAnimal);
     } catch (err) {
         res.status(400).send(err);
@@ -95,6 +104,10 @@ router.put("/:id", async(req, res) =>{
             newLikeList.push({_id:id, title:post.title});
         }
         result.likes = newLikeList;
+        newLikeList = [];
+        let postList = await getPostList(result._id.toString());
+        for(post of postList)
+            newLikeList.push({_id:post._id,title: post.title});
         result.posts = newLikeList;
         res.status(200).json(result);
     }catch (err){
@@ -106,13 +119,18 @@ router.delete("/:id", async(req, res) =>{
     let post;
     try {
         let animal = await animalData.get(req.params.id);
-        for(let postId of animal.likes){
+        let postList = await postData.getPostList(animal._id.toString());
+        let postId;
+        for(postId of animal.likes){
             post = await postData.read(postId.toString());
             newLikeList.push({_id: postId, title:post.title});
-            postData.delete(postId.toString());
+        }
+        animal.likes = newLikeList;
+        for(post of postList){
+            newLikeList.push({_id: post._id, title:post.title});
+            await postData.delete(post._id.toString());
         }
         await animalData.remove(animal._id.toString());
-        animal.likes = newLikeList;
         animal.posts = newLikeList;
         let result = {};
         result.deleted = true;
