@@ -4,7 +4,6 @@ getPeople = async () => {
     try {
         const {data} = await axios.get("https://gist.githubusercontent.com/robherley/5112d73f5c69a632ef3ae9b7b3073f78/raw/24a7e1453e65a26a8aa12cd0fb266ed9679816aa/people.json");
         buf = data;
-        console.log(buf);
     } catch (err) {
         throw `Get data error`;
     }
@@ -31,7 +30,7 @@ getByName = async (name) =>{
     let buf = [];
     let n = 0;
     for(people of data){
-        if(people.firstName == name || people.lastName == name){
+        if(people.firstName.toLowerCase().search(name) != -1 || people.lastName.toLowerCase().search(name) != -1 ){
             buf.push(people);
             ++n;
         }

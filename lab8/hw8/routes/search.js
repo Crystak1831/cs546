@@ -7,13 +7,13 @@ router.post("/", async (req, res) =>{
     if(!info.personName || typeof info.personName != `string`)
         res.status(400).json({error:"need a string person name"});
     try {
-        console.log(info.personName);
-        console.log(data.getByName);
+        // console.log(info.personName);
+        // console.log(data.getByName);
         let peopleList = await data.getByName(info.personName);
         if(peopleList.length == 0)
             res.render("search/notFound",{personName:info.personName});
         else
-            res.render("search/index",{peopleList:peopleList, personName:info.personName});
+            res.render("search/index",{peopleList:peopleList, personName:info.personName, title: "People Found"});
     } catch (err) {
         res.status(500).send(err);
     }
