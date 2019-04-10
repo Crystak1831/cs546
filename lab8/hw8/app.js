@@ -1,7 +1,8 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const app = express();
-app.use("/public", express.static(__dirname + "public"));
+
+app.use("/public", express.static(__dirname + "/public"));/* without the app.use "/public" express.static... the css can not work. */
 const configRoutes = require("./routes");
 const exphbs = require("express-handlebars");
 app.use(bodyParser.json());
