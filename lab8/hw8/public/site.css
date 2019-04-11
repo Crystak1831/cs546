@@ -1,6 +1,5 @@
 * {
     box-sizing: border-box;
-    /* background-color: green;/* without the app.use "/public" express.static */ */
 }
 html,
 body {
@@ -17,7 +16,6 @@ main {
 
 h1{
     background-color:#678;
-    color:white；
 }
 
 h2 {
@@ -28,7 +26,4 @@ h2 {
     min-height: 3em;
     margin: 10px 0;
     width: 100%;
-}
-#001{
-    color: red;
 }
